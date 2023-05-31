@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { CarsModule } from './cars/cars.module';
+import { ModelModule } from './models/model.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule } from '@nestjs/config';
 
@@ -16,6 +17,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     AuthModule,
     CarsModule,
+    ModelModule,
   ],
 })
 export class AppModule {}
