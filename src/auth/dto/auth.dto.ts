@@ -1,7 +1,7 @@
 import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
 import { IUser, token } from '../interface/auth.interface';
 
-export class UserDto implements IUser {
+class UserDto implements IUser {
   @ApiProperty({
     type: String,
     default: 'uuid',
@@ -26,7 +26,7 @@ export class UserDto implements IUser {
   })
   password: string;
 }
-export class TokenDTo implements token {
+class TokenDTo implements token {
   @ApiProperty({
     type: String,
     default: 'Successfully login',
