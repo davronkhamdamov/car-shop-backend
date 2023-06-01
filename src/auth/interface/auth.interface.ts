@@ -3,6 +3,7 @@ interface IUser {
   username: string;
   email: string;
   password: string;
+  imgurl: string;
 }
 interface token {
   message: string;

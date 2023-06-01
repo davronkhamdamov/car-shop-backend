@@ -1,8 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from "@nestjs/swagger";
 
 export class CurrentUserDto {
   @ApiProperty({
     type: String,
   })
-  id: string;
+  id: { id: string };
 }
