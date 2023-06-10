@@ -1,5 +1,12 @@
-import { OmitType, ApiProperty, PickType } from "@nestjs/swagger";
+import { OmitType, ApiProperty } from "@nestjs/swagger";
 import { IModel } from "../interface/car.interface";
+
+export class MedelId {
+  @ApiProperty({
+    type: String,
+  })
+  id: { id: string };
+}
 
 class IModelDto implements IModel {
   @ApiProperty({
@@ -17,8 +24,7 @@ class IModelDto implements IModel {
     description: "We recommend 200x200 images",
     default: "https://picsum.photos/300/300",
   })
-  modelImgUrl: string;
+  modelimgurl: string;
 }
 export class CreateModelDto extends OmitType(IModelDto, ["id"]) {}
 export class AllModelDto extends IModelDto {}
-export class IModelId extends PickType(IModelDto, ["id"]) {}

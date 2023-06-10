@@ -4,9 +4,9 @@ import {
   Injectable,
   Inject,
   UnauthorizedException,
-} from '@nestjs/common';
+} from "@nestjs/common";
 
-import { JwtService } from '@nestjs/jwt';
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class AuthorizationGuard implements CanActivate {
@@ -15,12 +15,11 @@ export class AuthorizationGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<any> {
     const request = context.switchToHttp().getRequest();
     let token = request.headers.authorization;
-
     if (!token) throw new UnauthorizedException();
 
     try {
-      if (token.startsWith('Bearer ')) {
-        token = token.substr('Bearer '.length);
+      if (token.startsWith("Bearer ")) {
+        token = token.substr("Bearer ".length);
         await this.jwtService.verifyAsync(token);
       }
     } catch (error) {

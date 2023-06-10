@@ -1,7 +1,18 @@
-import { Body, Controller, HttpCode, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  UseGuards,
+} from "@nestjs/common";
 import { AuthService } from "./auth.service";
 import { LoginDto, RegisterDto, Token } from "./dto/auth.dto";
-import { ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { AuthorizationGuard } from "./guard/Auth.guard";
+import { CurrentUser } from "./guard/auth.decorator";
+import { CurrentUserDto } from "./dto/Corrent.userDto";
+
 @ApiTags("Auth")
 @Controller("auth")
 export class AuthController {
@@ -17,7 +28,18 @@ export class AuthController {
   })
   @Post("register")
   async Register(@Body() user: RegisterDto) {
-    return this.authService.Register(user);
+    return await this.authService.Register(user);
+  }
+  @ApiResponse({
+    status: 200,
+    description: "User info",
+    type: RegisterDto,
+  })
+  @Get("/getuser")
+  @ApiBearerAuth()
+  @UseGuards(AuthorizationGuard)
+  async getUser(@CurrentUser() userId: CurrentUserDto) {
+    return await this.authService.getUser(userId);
   }
   @ApiResponse({
     status: 200,
@@ -28,6 +50,6 @@ export class AuthController {
   @Post("login")
   @HttpCode(200)
   async Login(@Body() user: LoginDto) {
-    return this.authService.Login(user);
+    return await this.authService.Login(user);
   }
 }

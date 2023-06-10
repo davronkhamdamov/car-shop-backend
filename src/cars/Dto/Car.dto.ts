@@ -1,6 +1,11 @@
-import { OmitType, ApiProperty, PickType } from "@nestjs/swagger";
+import { OmitType, ApiProperty } from "@nestjs/swagger";
 import { ICar } from "../interface/car.interface";
-
+export class ICarId {
+  @ApiProperty({
+    type: String,
+  })
+  id: { id: string };
+}
 class ICarDto implements ICar {
   @ApiProperty({
     type: String,
@@ -19,13 +24,6 @@ class ICarDto implements ICar {
     default: "1000$",
   })
   price: string;
-
-  @ApiProperty({
-    type: String,
-    description: "We recommend 200x200 images",
-    default: "https://picsum.photos/300/300",
-  })
-  image: string;
 
   @ApiProperty({
     type: String,
@@ -73,28 +71,26 @@ class ICarDto implements ICar {
     type: String,
     default: "https://picsum.photos/300/300",
   })
-  baseImgUrl: string;
+  baseimgurl: string;
 
   @ApiProperty({
     type: String,
     description: "We recommend 200x200 images",
     default: "https://picsum.photos/300/300",
   })
-  insideImgUrl: string;
+  insideimgurl: string;
 
   @ApiProperty({
     type: String,
     description: "We recommend 200x200 images",
     default: "https://picsum.photos/300/300",
   })
-  outsideImgUrl: string;
-
+  outsideimgurl: string;
   @ApiProperty({
     type: String,
     default: "uuid",
   })
-  modelId: string;
+  modelid: string;
 }
 export class CreateCarDto extends OmitType(ICarDto, ["id"]) {}
 export class AllCarDto extends ICarDto {}
-export class ICarId extends PickType(ICarDto, ["id"]) {}

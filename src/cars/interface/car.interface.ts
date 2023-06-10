@@ -9,10 +9,10 @@ interface ICar {
   tanirovkasi: boolean;
   year: string;
   distance: string;
-  baseImgUrl: string;
-  insideImgUrl: string;
-  outsideImgUrl: string;
-  modelId: string;
+  baseimgurl: string;
+  insideimgurl: string;
+  outsideimgurl: string;
+  modelid: string;
 }
 
 export { ICar };

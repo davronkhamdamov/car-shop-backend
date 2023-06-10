@@ -1,10 +1,10 @@
 export const dbConfig = {
-  client: 'pg',
+  client: "pg",
   connection: {
-    host: 'localhost',
-    user: 'postgres',
+    host: "localhost",
+    user: "postgres",
     port: 5432,
-    password: 'j24xt200',
-    database: 'carshop',
+    password: "j24xt200",
+    database: "carshop",
   },
 };

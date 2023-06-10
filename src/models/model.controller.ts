@@ -10,7 +10,7 @@ import {
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { ModelService } from "./model.service";
-import { AllModelDto, CreateModelDto, IModelId } from "./Dto/Model.dto";
+import { AllModelDto, CreateModelDto, MedelId } from "./Dto/Model.dto";
 import { AuthorizationGuard } from "src/auth/guard/Auth.guard";
 import { CurrentUser } from "../auth/guard/auth.decorator";
 import { CurrentUserDto } from "src/auth/dto/Corrent.userDto";
@@ -32,12 +32,21 @@ export class ModelController {
   }
   @ApiResponse({
     status: 200,
+    description: "All cars belonging to the model will be returned",
+    type: AllModelDto,
+  })
+  @Get("owncars/:id")
+  async getAllCarByModelId(@Param() id: MedelId) {
+    return this.modelService.getAllCarByModelId(id);
+  }
+  @ApiResponse({
+    status: 200,
     description: "One model be returned",
     type: AllModelDto,
   })
-  @Get(":id")
-  async oneModel(@Param() id: IModelId) {
-    return this.modelService.getAllModel();
+  @Get("one/:id")
+  async oneModel(@Param() id: MedelId) {
+    return this.modelService.getOneModel(id);
   }
   @ApiResponse({
     status: 201,
@@ -55,16 +64,16 @@ export class ModelController {
     status: 201,
     description: "model update",
   })
-  @Put("update")
-  async Updatemodel(@Body() model: CreateModelDto, @Param() id: IModelId) {
+  @Put("update/:id")
+  async Updatemodel(@Body() model: CreateModelDto, @Param() id: MedelId) {
     return this.modelService.UpdateModel(model, id);
   }
   @ApiResponse({
     status: 200,
     description: "model delete",
   })
-  @Delete("delete")
-  async Deletemodel(@Param() id: IModelId) {
+  @Delete("delete/:id")
+  async Deletemodel(@Param() id: MedelId) {
     return this.modelService.DeleteModel(id);
   }
 }
